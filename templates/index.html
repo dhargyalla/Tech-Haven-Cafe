@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} Cafe - Coffee & Wifi Website {% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row gx-4 gx-lg-5 mt-5 justify-content-center">
+            <div class="col col-md-10 col-lg-8 col-xl-7 text-center">
+                <div class="site-heading">
+                  <h3 class="display-4 fw-bold">Tech Haven Cafe</h3>
+                  <span class="subheading fs-5">Suggest your favourite Cafe!</span><br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row gx-4 gx-lg-5 mt-2 justify-content-center">
+            <div class="col col-md-10 col-lg-8 col-xl-7 text-center">
+                  <p>
+                      Welcome to Tech Haven Cafe, your ideal spot for productivity and creativity!
+                      With ample seating, high-speed Wi-Fi, and plenty of charging outlets,
+                      we cater to remote workers, students, and anyone needing a comfortable workspace.
+                      Enjoy our carefully crafted coffee and delicious pastries while soaking in a
+                      vibrant atmosphere filled with like-minded individuals. Whether you’re here for a quick
+                      meeting or a full day of work, Tech Haven is the perfect blend of comfort and connectivity.
+                  </p>
+                 <a class="btn btn-outline-secondary" href="/add_cafe">Suggest your favourite cafe!</a><br><br>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% set header_image ="../static/assets/img/header.jpg" %}
+{% set header_title = "Tech Haven Cafe" %}
+{% set header_subtitle = "Discover our services and offers" %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %} Cafe manager - Coffee & Wifi Website {% endblock %}
+
+{% block content %}
+<div class="container">
+  <!-- Content here -->
+  <div class="row mt-5">
+    <table class="table">
+      <thead>
+        <tr>
+          {% for column_name in column_names %}
+          <th scope="col">{{ column_name }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+      {% for row in cafes %}
+        <tr>
+          {% for column_name in column_names %}
+            {% set value = getattr(row, column_name) %}
+            {% if value is string and value[:4] == "http" and column_name == "map_url"%}
+            <td><a href="{{ getattr(row, column_name) }}">Maps Link</a></td>
+            {% elif column_name == "img_url" %}
+            <td><img src="{{ value }}" alt="Image of {{ row.name }}" width="100" height="100"></td>
+            {% else  %}
+            <td>{{value}}</td>
+            {% endif %}
+          {% endfor %}
+            <td><a href="{{ url_for('edit_cafe', cafe_id=row.id) }}" class="btn btn-warning">Edit</a></td>
+            <td><a href="{{ url_for('delete', cafe_id=row.id) }}" class="btn btn-danger">Delete</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+
+{% set header_image ="../static/assets/img/header.jpg" %}
+{% set header_title = "Co-work, everywhere" %}
+{% set header_subtitle = "From coffee shops to hotel lobbies, discover everyday places to work and connect." %}

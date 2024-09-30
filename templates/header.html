@@ -1,0 +1,64 @@
+{% block content %}
+<!-- Navigation Bar -->
+<header class="navbar navbar-expand-lg navbar-light bg-light py-3 mb-4 border-bottom">
+  <div class="container">
+    <!-- Brand/logo -->
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+      <span class="fs-4">Meeting Point</span>
+    </a>
+
+    <!-- Navbar toggler for mobile screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible menu -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto"> <!-- Align items to the right -->
+        <li class="nav-item">
+          <a href="/" class="nav-link active" aria-current="page">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/all_cafes" class="nav-link">Cafes</a>
+        </li>
+        {% if not current_user.is_authenticated: %}
+        <li class="nav-item">
+          <a href="/login" class="nav-link">Login</a>
+        </li>
+        <li class="nav-item">
+          <a href="/register" class="nav-link">Register</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a href="/cafe_manager" class="nav-link">Manage Cafe</a>
+        </li>
+        <li class="nav-item">
+          <a href="/logout" class="nav-link">logout</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</header>
+
+<!-- Dynamic Header Section -->
+<header style="background-image: url('{{ header_image }}'); background-size: cover; background-position: center; height: 400px; position: relative; color: white;">
+  <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);"></div> <!-- Dark overlay for better contrast -->
+  <div class="container position-relative px-4 px-lg-5 h-100 d-flex flex-column justify-content-center">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7 text-center">
+        <div class="site-heading">
+          <h1 class="display-4 fw-bold">{{ header_title }}</h1>
+          <span class="subheading fs-5">{{ header_subtitle }}</span><br><br>
+          <a class="btn btn-lg btn-success" href="/all_cafes">Explore Cafes</a><br><br>
+          <!-- Nothing in the area -->
+          Nothing listed in your area 😔 <br>
+          <a style="color: white;" href="add_cafe">Suggest a laptop friendly place now!</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% endblock %}

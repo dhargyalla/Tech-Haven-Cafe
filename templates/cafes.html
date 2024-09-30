@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %} Home - Coffee & Wifi Website {% endblock %}
+
+{% block content %}
+<!--<div class="container">-->
+<!--  &lt;!&ndash; Content here &ndash;&gt;-->
+<!--    <h1>Welcome to Coffee & Wifi Website</h1>-->
+<!--    <p>Enjoy browsing the best cafes with fast wifi.</p>-->
+<!--    <table class="table">-->
+<!--      <thead>-->
+<!--        <tr>-->
+<!--          {% for column_name in column_names %}-->
+<!--          <th scope="col">{{ column_name }}</th>-->
+<!--          {% endfor %}-->
+<!--        </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      {% for row in cafes %}-->
+<!--        <tr>-->
+<!--          {% for column_name in column_names %}-->
+<!--            {% set value = getattr(row, column_name) %}-->
+<!--            {% if value is string and value[:4] == "http" and column_name == "map_url"%}-->
+<!--            <td><a href="{{ getattr(row, column_name) }}">Maps Link</a></td>-->
+<!--            {% elif column_name == "img_url" %}-->
+<!--            <td><img src="{{ value }}" alt="Image of {{ row.name }}" width="100" height="100"></td>-->
+<!--            {% else  %}-->
+<!--            <td>{{value}}</td>-->
+<!--            {% endif %}-->
+<!--          {% endfor %}-->
+<!--        </tr>-->
+<!--      {% endfor %}-->
+<!--      </tbody>-->
+<!--  </table>-->
+<!--</div>-->
+
+
+{% macro render_checkmark(condition) %}
+  {% if condition %}
+    ✅
+  {% else %}
+    ❎
+  {% endif %}
+{% endmacro %}
+
+<div class="container">
+  <div class="row">
+    {% for row in cafes %}
+    <div class="col-12 col-sm-6 col-md-4 py-4"> <!-- Responsive columns -->
+      <div class="card h-100"> <!-- Makes all cards equal height -->
+        <img src="{{ row.img_url }}" alt="Image of {{ row.name }}" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">
+            <a href="{{ row.map_url }}">{{ row.name }}, {{ row.location }}</a>
+          </h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Sockets: {{ render_checkmark(row.has_sockets) }}</li>
+          <li class="list-group-item">Wifi: {{ render_checkmark(row.has_wifi) }}</li>
+          <li class="list-group-item">Seats: {{ row.seats }}</li>
+          <li class="list-group-item">Coffee Price: {{ row.coffee_price }}</li>
+          <li class="list-group-item">Can Take Calls: {{ render_checkmark(row.can_take_calls) }}</li>
+        </ul>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
+{% set header_image ="../static/assets/img/header.jpg" %}
+{% set header_title = "Co-work, everywhere" %}
+{% set header_subtitle = "From coffee shops to hotel lobbies, discover everyday places to work and connect." %}
